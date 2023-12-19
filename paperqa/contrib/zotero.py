@@ -124,9 +124,8 @@ class ZoteroDB(zotero.Zotero):
         if type(item) != dict:
             raise TypeError("Pass the full item of the paper. The item must be a dict.")
 
-        pdf_key = _extract_pdf_key(item)
 
-        if pdf_key is None:
+        if (pdf_key := _extract_pdf_key(item)) is None:
             return None
 
         pdf_path: Path = Path(self.storage / (pdf_key + ".pdf"))  # type: ignore
@@ -288,8 +287,7 @@ class ZoteroDB(zotero.Zotero):
         collection_id = ""
 
         for collection in collections:
-            name = collection["data"]["name"]
-            if name == collection_name:
+            if (name := collection["data"]["name"]) == collection_name:
                 collection_id = collection["data"]["key"]
                 break
 
