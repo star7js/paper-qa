@@ -67,7 +67,7 @@ class PromptCollection(BaseModel):
     @validator("pre")
     def check_pre(cls, v: Optional[PromptTemplate]) -> Optional[PromptTemplate]:
         if v is not None:
-            if set(v.input_variables) != set(["question"]):
+            if set(v.input_variables) != {"question"}:
                 raise ValueError("Pre prompt must have input variables: question")
         return v
 
